@@ -1,7 +1,7 @@
 // useState -> most important react hook (manage state in functional component)
 import React, { Component} from 'react';
 //import styled from 'styled-components';
-import './App.css';
+import classes from './App.module.css';
 //import Radium, { StyleRoot } from 'radium';
 // upper case for self-made components
 // lower-case reserved for html, etc.
@@ -106,6 +106,7 @@ class App extends Component {
     // };
 
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = ( // map function will dynamically work w the array so we don't have to hardcode -> it maps every element of array to whatever we need
@@ -127,24 +128,24 @@ class App extends Component {
       //   backgroundColor: 'salmon',
       //   color: 'black'
       // };
+      btnClass = classes.Red;
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red'); // classes = ['red']
+      assignedClasses.push(classes.red); // classes = ['red']
     } if (this.state.persons.length <= 1) {
-      classes.push('bold'); // classes = ['red', 'bold']
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
     return ( // wrap all in StyleRoot so we can use Radium advanced css features like media queries
-      //<StyleRoot>
-      <div className="App">
+      //<StyleRoot> 
+      <div className={classes.App}>
         <h1>Hi, I'm a React App</h1>
-        <p className={classes.join(' ')}>This is really working</p>
-        <StyledButton alt={this.state.showPersons}
+        <p className={assignedClasses.join(' ')}>This is really working</p>
+        <button className={btnClass}
           //style={styleX}
-          onClick={this.togglePersonsHandler}>Toggle Persons
-        </StyledButton>
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {persons}
       </div>
       //</StyleRoot> radium commented out for styled-components
